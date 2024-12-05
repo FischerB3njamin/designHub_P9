@@ -1,8 +1,10 @@
 import 'dart:io';
-
 import 'helper.dart';
-import 'init.dart';
+
+import 'main.dart';
 import 'menues.dart';
+import 'service/profile_service.dart';
+import 'service/registration_service.dart';
 
 void handleProfile(String id, String mail) {
   Map profile = {};
@@ -12,7 +14,8 @@ void handleProfile(String id, String mail) {
       updateLoginWithId(mail, id);
       profile = loadProfileById(id);
     } else {
-      //profile = profile.keys().isNotEmpty() ? profile : loadProfile(id);
+      profile = loadProfileById(id);
+      print("Willkommen zurück ${profile['name']}");
       profileMenue();
       String input = stdin.readLineSync() ?? '';
       if (input.isNotEmpty) {
@@ -25,44 +28,14 @@ void handleProfile(String id, String mail) {
             deleteProfile(id, mail);
             run();
           case '4':
+            clearConsole();
+            print('bitte logge dich ein');
             return;
         }
       }
     }
     clearConsole();
   }
-}
-
-void showProfile(Map profile) {
-  print("Profilübersicht:");
-  print("Name: ${profile['name']}");
-  print("Stadt: ${profile['city']}");
-  print("Job: ${profile['job']}");
-  print('drücke enter für weiter');
-  String? input = stdin.readLineSync();
-}
-
-Map updateProfile(String id) {
-  while (true) {
-    editProfileMenu();
-    String input = stdin.readLineSync() ?? '';
-
-    switch (input) {
-      case '1':
-        updateName(id);
-      case '2':
-        updateJob(id);
-      case '3':
-        updateCity(id);
-      case '4':
-        return loadProfileById(id);
-    }
-  }
-}
-
-void deleteProfile(String id, String mail) {
-  deleteProfileById(id);
-  deleteLogin(mail);
 }
 
 String createProfile() {
@@ -83,6 +56,35 @@ String createProfile() {
   return id;
 }
 
+void showProfile(Map profile) {
+  print("Profilübersicht:");
+  print("Name: ${profile['name']}");
+  print("Stadt: ${profile['city']}");
+  print("Job: ${profile['job']}");
+  print('drücke enter für weiter');
+  // wait until user press enter to clear the window
+  stdin.readLineSync();
+}
+
+Map updateProfile(String id) {
+  while (true) {
+    clearConsole();
+    editProfileMenu();
+    String input = stdin.readLineSync() ?? '';
+
+    switch (input) {
+      case '1':
+        updateName(id);
+      case '2':
+        updateJob(id);
+      case '3':
+        updateCity(id);
+      case '4':
+        return loadProfileById(id);
+    }
+  }
+}
+
 void updateName(String id) {
   print('gebe deinen neuen Namen ein:');
   update(id, 'name');
@@ -101,4 +103,9 @@ void updateCity(String id) {
 void update(id, key) {
   String input = stdin.readLineSync() ?? '';
   updateProfileJson(id, key, input);
+}
+
+void deleteProfile(String id, String mail) {
+  deleteProfileById(id);
+  deleteLogin(mail);
 }

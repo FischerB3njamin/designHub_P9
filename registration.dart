@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'helper.dart';
 import 'profile.dart';
+import 'service/registration_service.dart';
 
 bool registration() {
   while (true) {
