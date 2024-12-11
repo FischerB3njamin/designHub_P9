@@ -1,45 +1,30 @@
-import 'dart:io';
-import 'dart:convert';
+import 'file_service.dart';
 
-const PROFILE_FILE_PATH = 'data/profile.json';
+class ProfileService {
+  static Map loadProfile(String id) {
+    Map data = FileService.loadProfileJson(PROFILE_FILE_PATH);
 
-Map loadProfile() {
-  final file = File(PROFILE_FILE_PATH);
-  final contents = file.readAsStringSync();
-  if (contents.isNotEmpty) {
-    return json.decode(contents)!;
+    return data[id];
   }
-  return {};
-}
 
-Map loadProfileById(String id) {
-  Map data = loadProfile();
+  static void saveProfile(Map _data, String id) {
+    Map data = FileService.loadProfileJson(PROFILE_FILE_PATH);
+    data[id] = _data;
 
-  return data[id];
-}
+    FileService.saveProfileJson(data);
+  }
 
-void saveNewProfile(Map _data, String id) {
-  Map data = loadProfile();
-  data[id] = _data;
+  static void updateProfile(String id, String key, String value) {
+    Map data = FileService.loadProfileJson(PROFILE_FILE_PATH);
+    data[id][key] = value;
 
-  saveProfile(data);
-}
+    FileService.saveProfileJson(data);
+  }
 
-void updateProfileJson(String id, String key, String value) {
-  Map data = loadProfile();
-  data[id][key] = value;
+  static void deleteProfile(id) {
+    Map data = FileService.loadProfileJson(PROFILE_FILE_PATH);
+    data.remove(id);
 
-  saveProfile(data);
-}
-
-void deleteProfileById(id) {
-  Map data = loadProfile();
-  data.remove(id);
-
-  saveProfile(data);
-}
-
-void saveProfile(Map _data) {
-  final file = File(PROFILE_FILE_PATH);
-  file.writeAsStringSync(json.encode(_data));
+    FileService.saveProfileJson(data);
+  }
 }

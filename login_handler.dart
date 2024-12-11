@@ -10,7 +10,7 @@ class LoginHandler {
     _getMail();
     _getPassword();
 
-    if (_setProfile()) {
+    if (MyProfile().setProfile(this.mail, this.password)) {
       return;
     }
     print('Email oder Passwort stimmen nicht. Versuche es erneut!');
@@ -35,9 +35,5 @@ class LoginHandler {
       this.password = pwd;
       return;
     }
-  }
-
-  bool _setProfile() {
-    return MyProfile().setProfile(this.mail, this.password);
   }
 }

@@ -1,36 +1,32 @@
-import 'dart:io';
-import 'dart:convert';
+import 'file_service.dart';
 
-const LOGIN_FILE_PATH = 'data/login.json';
-
-Map loadLoginJson() {
-  final file = File(LOGIN_FILE_PATH);
-  final contents = file.readAsStringSync();
-  if (contents.isNotEmpty) {
-    return json.decode(contents)!;
+class RegistrationService {
+  static void saveLogin(Map _data) {
+    List data = FileService.loadLoginJson();
+    data.add(_data);
+    FileService.saveJson(data);
   }
-  return {};
-}
 
-void saveLogin(Map _data) {
-  Map data = loadLoginJson();
-  data[_data['mail']] = {"password": _data['password'], "id": ""};
-  saveJson(data);
-}
+  static void deleteLogin(String id) {
+    List data = FileService.loadLoginJson();
+    List withoutProfile = [];
+    for (Map x in data) {
+      if (x['id'] != id) {
+        withoutProfile.add(x);
+      }
+    }
+    FileService.saveJson(withoutProfile);
+  }
 
-void updateLoginWithId(mail, id) {
-  Map data = loadLoginJson();
-  data[mail]["id"] = id;
-  saveJson(data);
-}
+  static getIdFromLogin(String mail, String password) {
+    List logindata = FileService.loadLoginJson();
 
-void deleteLogin(mail) {
-  Map data = loadLoginJson();
-  data.remove(mail);
-  saveJson(data);
-}
+    for (Map x in logindata) {
+      if (x['mail'] == mail && x['password'] == password) {
+        return x['id'];
+      }
+    }
 
-void saveJson(Map _data) {
-  final file = File(LOGIN_FILE_PATH);
-  file.writeAsStringSync(json.encode(_data));
+    return '';
+  }
 }
