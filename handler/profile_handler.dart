@@ -1,8 +1,7 @@
 import 'dart:io';
 import '../main.dart';
-import '../utils.dart';
-import '../menues.dart';
-import '../my_profile.dart';
+import '../classes/utils.dart';
+import '../classes/my_profile.dart';
 
 class ProfileHandler {
   void handleProfile() {
@@ -57,5 +56,19 @@ class ProfileHandler {
           return MyProfile().reloadProfile();
       }
     }
+  }
+
+  void editProfileMenu() {
+    print('[1] Name ändern');
+    print('[2] Job ändern');
+    print('[3] Stadt ändern');
+    print('[4] zurück');
+  }
+
+  void profileMenue() {
+    print('[1] zeige Profil');
+    print('[2] Profil bearbeiten');
+    print('[3] Profil löschen');
+    print('[4] auslogen');
   }
 }

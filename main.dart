@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'handler/login_handler.dart';
-import 'menues.dart';
-import 'my_profile.dart';
+import 'classes/my_profile.dart';
 import 'handler/profile_handler.dart';
 import 'handler/registration_handler.dart';
 
@@ -25,6 +24,12 @@ void run() {
       }
     }
   }
+}
+
+void startMenu() {
+  print('Willkommen melde dich an oder registriere dich');
+  print('[1] registrieren');
+  print('[2] anmelden');
 }
 
 void main() {

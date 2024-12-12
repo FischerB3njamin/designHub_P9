@@ -1,6 +1,6 @@
 import 'dart:io';
-import '../my_profile.dart';
-import '../utils.dart';
+import '../classes/my_profile.dart';
+import '../classes/utils.dart';
 
 class LoginHandler {
   String mail = "";

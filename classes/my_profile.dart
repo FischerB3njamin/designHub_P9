@@ -1,7 +1,6 @@
 import 'dart:io';
-
-import 'service/profile_service.dart';
-import 'service/registration_service.dart';
+import '../service/profile_service.dart';
+import '../service/registration_service.dart';
 import 'utils.dart';
 
 class MyProfile {
