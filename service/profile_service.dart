@@ -3,8 +3,10 @@ import 'file_service.dart';
 class ProfileService {
   static Map loadProfile(String id) {
     Map data = FileService.loadProfileJson(PROFILE_FILE_PATH);
-
-    return data[id];
+    if (data.containsKey(id)) {
+      return data[id];
+    }
+    return {};
   }
 
   static void saveProfile(Map _data, String id) {
