@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'my_profile.dart';
-import 'service/registration_service.dart';
-import 'utils.dart';
+import '../my_profile.dart';
+import '../service/registration_service.dart';
+import '../utils.dart';
 
 class RegistrationHandler {
   RegistrationData data = RegistrationData('', '');

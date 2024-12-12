@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'main.dart';
-import 'utils.dart';
-import 'menues.dart';
-import 'my_profile.dart';
+import '../main.dart';
+import '../utils.dart';
+import '../menues.dart';
+import '../my_profile.dart';
 
 class ProfileHandler {
   void handleProfile() {

@@ -1,13 +1,12 @@
 import 'dart:io';
-import 'login_handler.dart';
+import 'handler/login_handler.dart';
 import 'menues.dart';
 import 'my_profile.dart';
-import 'profile_handler.dart';
-import 'registration_handler.dart';
+import 'handler/profile_handler.dart';
+import 'handler/registration_handler.dart';
 
 void run() {
   while (true) {
-    print(MyProfile().loggedIn);
     if (MyProfile().loggedIn) {
       ProfileHandler().handleProfile();
     } else {
