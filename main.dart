@@ -14,10 +14,8 @@ void run() {
 
       switch (input) {
         case '1':
-          print("reg");
           RegistrationHandler().registration();
         case '2':
-          print('login');
           LoginHandler().login();
         default:
           print('eingabe ungültig');
